@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.ips.taller4.demo.model.Usuario;
+import ar.edu.ips.taller4.demo.model.UsuarioFlaco;
 import ar.edu.ips.taller4.demo.repositories.UsuarioRepository;
 import ar.edu.ips.taller4.demo.services.UsuarioService;
 
@@ -33,6 +34,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario insert(Usuario usuario) {
 		return repository.save(usuario);
+	}
+
+	@Override
+	public Usuario update(Usuario usuario) {
+		return repository.save(usuario);
+	}
+
+	@Override
+	public List<UsuarioFlaco> findByNombreLike(String valor) {
+		return repository.findByNombreStartingWith(valor);
 	}
 
 }

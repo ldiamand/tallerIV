@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 // JPA
@@ -13,22 +14,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.objenesis.instantiator.annotations.Instantiator;
 
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "usuarios")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
+	//@Column(insertable = false, updatable = false)
 	private String nombre;
 	
 	private String apellido;
 	
 	private Integer edad;
+	
+	@Transient
+	private String calculado;
 	
 	@Embedded
 	@AttributeOverrides({
@@ -58,7 +69,7 @@ public class Usuario {
     })
 	private Direccion direccionTrabajo;
 	
-	@ManyToMany
-	private Set<Item> items;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Item item;
 	
 }

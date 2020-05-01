@@ -13,45 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.edu.ips.taller4.demo.model.Animal;
+import ar.edu.ips.taller4.demo.model.Medico;
+import ar.edu.ips.taller4.demo.model.Pajaro;
+import ar.edu.ips.taller4.demo.model.Perro;
 import ar.edu.ips.taller4.demo.model.Usuario;
 import ar.edu.ips.taller4.demo.model.UsuarioFlaco;
+import ar.edu.ips.taller4.demo.repositories.AnimalRepository;
 import ar.edu.ips.taller4.demo.services.UsuarioService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping(path = "/usuario")
+@RequestMapping(path = "/medico")
 @Slf4j
-public class UsuarioController {
+public class MedicoController {
 	
 	@Autowired
-	private UsuarioService service;
+	private MedicoRepository repo;
 
-	@GetMapping("/{id}")
-	public Usuario metodoGet(@PathVariable(name = "id") Long id) {
-		log.info("Ingresando a metodoGet con id {}", id);
-		return service.findById(id).orElseThrow(() -> { throw new RuntimeException("Usuario no existe"); });
-	}
-	
-	@GetMapping
-	public List<Usuario> getAll() {
-		return service.getAll();
-	}
-	
-	@GetMapping("/consulta")
-	public List<UsuarioFlaco> findByNombreLike(@RequestParam(name = "nombre") String valor) {
-		return service.findByNombreLike(valor);
-	}
-	
 	// curl -X POST -H 'Content-Type: application/json' 
 	//   --data '{"id": 1,"nombre":"luciano","apellido":"diamand"}' 'http://localhost:8080/usuario'
 	@PostMapping
-	public Usuario crearUsuario(@RequestBody Usuario usuario) {
-		return service.insert(usuario);
+	public Medico crearUsuario(@RequestBody Medico animal) {
+		return repo.save(animal);
 	}
 	
-	@PutMapping
-	public Usuario actualizarUsuario(@RequestBody Usuario usuario) {
-		return service.update(usuario);
+	@GetMapping
+	public List<Medico> getAll() {
+		return repo.findAll();
 	}
 	
 }
