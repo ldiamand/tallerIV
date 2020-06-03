@@ -4,20 +4,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 
 import lombok.Data;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Data
+@Entity
 public class Persona {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String nombre;
+	
+	private String apellido;
 	
 }
