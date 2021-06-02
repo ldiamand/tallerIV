@@ -1,4 +1,4 @@
-package ar.edu.ips.taller4.demo.controllers;
+package ar.edu.ips.taller4.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
