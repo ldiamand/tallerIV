@@ -23,7 +23,7 @@ public class PersonaController {
 	private PersonaRepository repo;
 	
 	@PostMapping
-	@PreAuthorize("hasRole(ADMIN)")
+	//@PreAuthorize("hasRole(ADMIN)")
 	public Persona save(@RequestBody Persona persona) {
 		return repo.save(persona);
 	}
